@@ -15,7 +15,12 @@ namespace ListViewSample
 			var myList = new ListView () {
 				ItemsSource = person.Persona,
 				ItemTemplate = new DataTemplate (typeof(MyListViewCell)),
-				HasUnevenRows = true
+				HasUnevenRows = true,
+			};
+		
+
+			var addButton = new Button () {
+				
 			};
 
 			var myStack = new StackLayout () {
