@@ -8,8 +8,14 @@ namespace BasicInputOutputSample
 	{
 		public App ()
 		{
-			// The root page of your application
+			// basic operations
 			MainPage = new BasicOperations ();
+
+			// Int to string Conversion
+			//MainPage = new IntegerToWordConversion ();
+
+			// string to int conversion
+			//MainPage = new WordToIntegerConversion ();
 		}
 
 		protected override void OnStart ()

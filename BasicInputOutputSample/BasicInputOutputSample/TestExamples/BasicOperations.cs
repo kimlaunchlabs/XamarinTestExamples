@@ -12,13 +12,13 @@ namespace BasicInputOutputSample
 			double firstNum = 0.0;
 			double secondNum = 0.0;
 
-			var firstEntry = new Entry () { Placeholder = "First Number" };
+			var firstEntry = new Entry () { Placeholder = "First Number", Keyboard = Keyboard.Numeric };
 			firstEntry.TextChanged += (sender, e) => 
 			{
 			 firstNum = Convert.ToDouble(e.NewTextValue);
 			};
 
-			var secondEntry = new Entry () { Placeholder = "Second Number" };
+			var secondEntry = new Entry () { Placeholder = "Second Number", Keyboard = Keyboard.Numeric };
 			secondEntry.TextChanged += (sender, e) => 
 			{
 				secondNum = Convert.ToDouble(e.NewTextValue);
@@ -74,7 +74,8 @@ namespace BasicInputOutputSample
 			};
 
 			var mainStack = new StackLayout () {
-				VerticalOptions = LayoutOptions.Center,
+				Padding = new Thickness (0,20,0,0),
+				//VerticalOptions = LayoutOptions.Start,
 				Children = {entryStack, buttonStack, outputStack}
 			};
 
