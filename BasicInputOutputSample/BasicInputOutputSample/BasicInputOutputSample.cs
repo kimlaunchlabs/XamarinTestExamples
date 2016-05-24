@@ -9,13 +9,21 @@ namespace BasicInputOutputSample
 		public App ()
 		{
 			// basic operations
-			MainPage = new BasicOperations ();
+		//	MainPage = new BasicOperations ();
 
 			// Int to string Conversion
 			//MainPage = new IntegerToWordConversion ();
 
 			// string to int conversion
 			//MainPage = new WordToIntegerConversion ();
+
+			// Exeption (Console)
+			//MainPage = new ExceptionExample ();
+
+			// IEnumerable Samples
+			MainPage = new Example1();
+
+
 		}
 
 		protected override void OnStart ()

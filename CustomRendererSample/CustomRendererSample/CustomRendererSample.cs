@@ -6,6 +6,9 @@ namespace CustomRendererSample
 {
 	public class App : Application
 	{
+		public static double ScreenHeight;
+		public static double ScreenWidth;
+
 		// Basic custom renderer concept
 		public App ()
 		{
@@ -14,6 +17,10 @@ namespace CustomRendererSample
 
 			// Entry Renderer
 			//MainPage = new NavigationPage (new EntryExample());
+
+
+			// Map Renderer
+			//MainPage = new NavigationPage (new MapPage());
 
 			// Button Renderer
 			//MainPage = new NavigationPage (new ButtonExample());

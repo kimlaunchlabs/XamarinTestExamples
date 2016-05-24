@@ -29,7 +29,7 @@ namespace CustomRendererSample.Droid
 				System.Diagnostics.Debug.WriteLine (@"     ERROR: ", ex.Message);
 			}
 		}
-
+		// Layout from Resources->layout->CustomLayout.axml
 		void GetInterface ()
 		{
 			activity = this.Context as Activity;
