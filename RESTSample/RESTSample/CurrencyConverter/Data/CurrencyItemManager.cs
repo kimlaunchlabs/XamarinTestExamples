@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace RESTSample
 {
@@ -12,15 +13,13 @@ namespace RESTSample
 			restService = service;
 		}
 
-		public Task <RootObject> ConvertAsync()
+		public Task <RootObject> ConvertAsync(string toCurr, string fromCurr)
 		{
-			return restService.ConvertCurrency ();
+			string a = toCurr;
+			string b = fromCurr;
+			return restService.ConvertCurrency (a, b);
 		}
-
-//		public Task ConvertCurrency (CurrencyConverterItem CurrItem)
-//		{
-//			return restService.ConvertCurrencyItemAsync (CurrItem);
-//		}
+			
 	}
 }
 

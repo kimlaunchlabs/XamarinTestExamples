@@ -11,12 +11,15 @@ namespace RESTSample
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		//String tempBalor = "";
+
 		public CurrenyConvertFormViewModel ()
 		{
 			var currItem = new CurrencyConverterItem ();
 			FromCurrency = currItem.FromCurrency;
 			ToCurrency = currItem.ToCurrency;
 			AmountCurrency = currItem.AmountCurrency;
+			//Balor = tempBalor;
 		}
 
 		private string from_Currency;
@@ -55,12 +58,35 @@ namespace RESTSample
 			}
 		}
 
+		private string balor;
+		public string Balor
+		{
+			get {
+				return balor;
+			}
+			set {
+				balor = value;
+				OnPropertyChanged ();
+			}
+		}
+
 		public ICommand Convert
 		{
 			get {
-				return new Command (() => {
-					//App.currManager.ConvertAsync();
-					//System.Diagnostics.Debug.WriteLine (ToCurrency);
+				return new Command (async() => {
+					try {
+						var a = await App.currManager.ConvertAsync(FromCurrency,to_Currency);
+
+						System.Diagnostics.Debug.WriteLine("Final " + a.results.CONVERT.val);
+						 
+						string toString = a.results.CONVERT.val.ToString();
+
+						Balor = toString;
+
+					} catch (Exception ex) {
+						System.Diagnostics.Debug.WriteLine(ex.Message + " + " + "Input Error");
+						Balor = ex.Message + "    OR It is an Invalid Input";
+					}
 				});
 			}
 		}

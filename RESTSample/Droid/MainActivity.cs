@@ -19,7 +19,9 @@ namespace RESTSample.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
-			LoadApplication (new App ());
+			set
+
+			//LoadApplication (new App ());
 		}
 	}
 }

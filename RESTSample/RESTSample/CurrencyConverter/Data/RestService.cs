@@ -5,6 +5,10 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Converters;
+using System.Dynamic;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace RESTSample
 {
@@ -12,7 +16,8 @@ namespace RESTSample
 	{
 		HttpClient client;
 
-		public RootObject Items { get; private set;}
+		public RootObject Items;
+
 
 		public RestService ()
 		{
@@ -24,26 +29,28 @@ namespace RESTSample
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Basic", authHeaderValue);
 		}
 
-		public async Task <RootObject> ConvertCurrency ()
+		public async Task <RootObject> ConvertCurrency (string toCurr, string fromCurr)
 		{
-			Items = new RootObject ();
-			var uri = new Uri (string.Format(Constants.RestUrl));
+			string thisReplace = toCurr + "_" + fromCurr;
+			System.Diagnostics.Debug.WriteLine ("replace " + thisReplace);
+
+			var uri = new Uri (string.Format(Constants.RestUrl) + thisReplace);
+
 
 			try {
 				var response = await client.GetAsync(uri);
 				if (response.IsSuccessStatusCode) {
 					var content = await response.Content.ReadAsStringAsync();
-					//Items = JsonConvert.DeserializeObject<RootObject>(content);
 
-					dynamic jresponse = JsonConvert.DeserializeObject(content);
+					var thisContent = content.Replace(thisReplace.ToUpper(), "CONVERT");
 
-					System.Diagnostics.Debug.WriteLine(jresponse["USD_PHP"]);
+					Items = JsonConvert.DeserializeObject<RootObject>(thisContent);
+					//var a = Items["results.USD_PHP"].Value<string>();
 				}
+					
 			} catch (Exception e) {
-				System.Diagnostics.Debug.WriteLine (@"       Error{0}", e.Message);
+				System.Diagnostics.Debug.WriteLine (@"Error  {0} ", e.Message);
 			}
-
-			//System.Diagnostics.Debug.WriteLine(Items);
 			return Items;
 
 		}

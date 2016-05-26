@@ -19,6 +19,11 @@ namespace RESTSample
 	public class Query
 	{
 		public int count { get; set; }
+
+		public override string ToString ()
+		{
+			return string.Format ("[Query: count={0}]", count);
+		}
 	}
 
 	public class USDPHP
@@ -36,13 +41,23 @@ namespace RESTSample
 
 	public class Results
 	{
-		public USDPHP USD_PHP { get; set; }
+		public USDPHP CONVERT { get; set; }
+
+		public override string ToString ()
+		{
+			return string.Format ("[Results: USD_PHP={0}]", CONVERT);
+		}
 	}
 
 	public class RootObject
 	{
 		public Query query { get; set; }
 		public Results results { get; set; }
+
+		public override string ToString ()
+		{
+			return string.Format ("[RootObject: query={0}, results={1}]", query, results);
+		}
 	}
 
 

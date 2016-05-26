@@ -27,36 +27,43 @@ namespace RESTSample
 			var toLabel = new Label () { Text = "To" };
 
 			var toEntry = new Entry () {
-				WidthRequest = 100
+				WidthRequest = 100,
 			};
 			toEntry.SetBinding (Entry.TextProperty, "ToCurrency");
+
 
 			var convertButton = new Button () {
 				Text = "Convert"
 			};
 			convertButton.SetBinding (Button.CommandProperty, "Convert");
 
-			// StackLayouts
-			var fromStack = new StackLayout () {
-				HorizontalOptions = LayoutOptions.CenterAndExpand,
-				Orientation = StackOrientation.Horizontal, 
-				Children = {fromLabel, fromEntry} };
+			var valueLabel = new Label () {
+				
+			};
+			valueLabel.SetBinding (Label.TextProperty, "Balor");
 
-			var amountStack = new StackLayout () { 
-				HorizontalOptions = LayoutOptions.CenterAndExpand,
-				Orientation = StackOrientation.Horizontal, 
-				Children = {amountLabel, amountEntry} };
+			// StackLayouts
+			var firstColumn = new StackLayout () {
+				Padding = new Thickness (0,8,0,0),
+				Spacing = 13,
+				HorizontalOptions = LayoutOptions.EndAndExpand,
+				Children = {fromLabel, toLabel, amountLabel} };
+
+			var secondColumn = new StackLayout () { 
+				HorizontalOptions = LayoutOptions.StartAndExpand,
+				Children = {fromEntry, toEntry, amountEntry} };
 
 			var toStack = new StackLayout () { 
-				HorizontalOptions = LayoutOptions.CenterAndExpand,
+				Spacing = 10,
 				Orientation = StackOrientation.Horizontal, 
-				Children = {toLabel, toEntry} };
+				Children = {firstColumn, secondColumn} 
+			};
 
 			// main stack
 			var mainStack = new StackLayout () { 
 				VerticalOptions = LayoutOptions.CenterAndExpand,
-				Spacing =10,
-				Children = {fromStack, toStack, amountStack, convertButton} 
+				Spacing =15,
+				Children = {toStack, convertButton, valueLabel} 
 			};
 
 			Content = mainStack;
