@@ -18,6 +18,8 @@ namespace RESTSample
 
 		public RootObject Items;
 
+		public RootObjectWeather weatherItems;
+
 
 		public RestService ()
 		{
@@ -32,7 +34,7 @@ namespace RESTSample
 		public async Task <RootObject> ConvertCurrency (string toCurr, string fromCurr)
 		{
 			string thisReplace = toCurr + "_" + fromCurr;
-			System.Diagnostics.Debug.WriteLine ("replace " + thisReplace);
+			//System.Diagnostics.Debug.WriteLine ("replace " + thisReplace);
 
 			var uri = new Uri (string.Format(Constants.RestUrl) + thisReplace);
 
@@ -52,7 +54,28 @@ namespace RESTSample
 				System.Diagnostics.Debug.WriteLine (@"Error  {0} ", e.Message);
 			}
 			return Items;
+		}
 
+		public async Task <RootObjectWeather> GetWeatherDataAsync (string location)
+		{
+			string thisLocation = location;
+
+			string apikey = "147a4dedf73ad453d97b7229d819614a";
+
+			var uri = new Uri (string.Format(Constants.RestUrlWeather) + thisLocation + "&apikey=" + apikey);
+			//var uri = new Uri (string.Format(Constants.RestUrlWeather));
+
+			try {
+				var response = await client.GetAsync(uri);
+				if (response.IsSuccessStatusCode) {
+					var content = await response.Content.ReadAsStringAsync();
+					weatherItems = JsonConvert.DeserializeObject<RootObjectWeather>(content);
+				}
+			} catch (Exception ex) {
+				System.Diagnostics.Debug.WriteLine (@"Error {0} ", ex.Message);
+			}
+
+			return weatherItems;
 		}
 
 	}

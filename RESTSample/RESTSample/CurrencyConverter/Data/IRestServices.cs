@@ -8,7 +8,7 @@ namespace RESTSample
 	{
 		Task <RootObject> ConvertCurrency (string toCurr, string fromCurr);
 
-		//Task ConvertCurrencyItemAsync (CurrencyConverterItem CurrItem);
+		Task <RootObjectWeather> GetWeatherDataAsync (string location);
 	}
 }
 
